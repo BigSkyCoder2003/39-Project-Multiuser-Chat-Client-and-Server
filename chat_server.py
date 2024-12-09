@@ -2,6 +2,7 @@
 #
 # python select_server.py 3490
 
+import sys
 import json
 import socket
 import select
@@ -10,6 +11,8 @@ serverIP = '127.0.0.1'
 
 clients = {}
 
+def usage():
+    print("python3 select_server.py 3490")
 
 def broadcast(message, exclude_client = None):
     
@@ -35,10 +38,13 @@ def remove_client(client):
       broadcast({"type": "leave", "nick": nick})
       client.close()
 
-def main():
+def main(argv):
     """Main server logic."""
-    host = "0.0.0.0"
-    port = 3490
+    if len(sys.argv) != 2:
+            usage()
+            sys.exit(1)
+    host = serverIP
+    port = int(sys.argv[1])
 
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -89,4 +95,4 @@ def main():
             s.close()
 
 if __name__ == "__main__":
-    main()
+   main(sys.argv)

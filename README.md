@@ -22,6 +22,9 @@ Starts the chat client, connects to the server, and runs the message send and re
 
 ## Chat Server Documentation
 
+### `usage() -> None`
+Displays how to run the script with correct arguments.
+
 ### `broadcast(message, exclude_client=None) -> None`
 Sends a message to all connected clients except the specified one.
 
